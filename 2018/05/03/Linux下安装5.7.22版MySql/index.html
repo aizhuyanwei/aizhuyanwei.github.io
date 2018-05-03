@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>那些年我们踩过的坑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言 安装mysql       yum install mysql       yum install mysql-server       yum install mysql-devel这个默认安装的是mysql5.5版的,由于5.5的不支持默认当前系统时间,所以开始5.7.22的踩坑之路…….. 开始检测系统是否自带安装 mysql:                  rpm -qa | g">
+  <meta name="description" content="前言 安装mysql       yum install mysql       yum install mysql-server       yum install mysql-devel这个默认安装的是mysql5.5版的,由于5.5的不支持默认当前系统时间,所以开始5.7.22的踩坑之路……..">
 <meta property="og:type" content="article">
 <meta property="og:title" content="那些年我们踩过的坑">
 <meta property="og:url" content="http://yoursite.com/2018/05/03/Linux下安装5.7.22版MySql/index.html">
 <meta property="og:site_name" content="那些年我们踩过的坑">
-<meta property="og:description" content="前言 安装mysql       yum install mysql       yum install mysql-server       yum install mysql-devel这个默认安装的是mysql5.5版的,由于5.5的不支持默认当前系统时间,所以开始5.7.22的踩坑之路…….. 开始检测系统是否自带安装 mysql:                  rpm -qa | g">
+<meta property="og:description" content="前言 安装mysql       yum install mysql       yum install mysql-server       yum install mysql-devel这个默认安装的是mysql5.5版的,由于5.5的不支持默认当前系统时间,所以开始5.7.22的踩坑之路……..">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-03T10:38:42.561Z">
+<meta property="og:updated_time" content="2018-05-03T15:12:48.918Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="那些年我们踩过的坑">
-<meta name="twitter:description" content="前言 安装mysql       yum install mysql       yum install mysql-server       yum install mysql-devel这个默认安装的是mysql5.5版的,由于5.5的不支持默认当前系统时间,所以开始5.7.22的踩坑之路…….. 开始检测系统是否自带安装 mysql:                  rpm -qa | g">
+<meta name="twitter:description" content="前言 安装mysql       yum install mysql       yum install mysql-server       yum install mysql-devel这个默认安装的是mysql5.5版的,由于5.5的不支持默认当前系统时间,所以开始5.7.22的踩坑之路……..">
   
     <link rel="alternative" href="/atom.xml" title="那些年我们踩过的坑" type="application/atom+xml">
   
@@ -163,7 +163,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 安装mysql<br>       yum install mysql<br>       yum install mysql-server<br>       yum install mysql-devel<br>这个默认安装的是mysql5.5版的,由于5.5的不支持默认当前系统时间,所以开始5.7.22的踩坑之路……..</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 安装mysql<br>       yum install mysql<br>       yum install mysql-server<br>       yum install mysql-devel<br>这个默认安装的是mysql5.5版的,由于5.5的不支持默认当前系统时间,所以开始5.7.22的踩坑之路……..<br><a id="more"></a></p>
 <h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p>检测系统是否自带安装 mysql:<br>                  <code>rpm -qa | grep mysql</code><br>如果你系统有安装，那可以选择进行卸载:<br>    <code>rpm -e mysql</code>　　// 普通删除模式<br>    <code>rpm -e --nodeps mysql</code>　　// 强力删除模式，如果使用上面命令删除时，提示有依赖的其它文件，则用该命令可以对其进行强力删除</p>
 <ul>
 <li>下载MySql5.7.22 yum库<br><code>rpm wgethttp://dev.MySQL.com/get/mysql57-community-release-el7-7.noarch.rpm</code></li>

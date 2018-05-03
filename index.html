@@ -161,19 +161,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 安装mysql<br>       yum install mysql<br>       yum install mysql-server<br>       yum install mysql-devel<br>这个默认安装的是mysql5.5版的,由于5.5的不支持默认当前系统时间,所以开始5.7.22的踩坑之路……..</p>
-<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p>检测系统是否自带安装 mysql:<br>                  <code>rpm -qa | grep mysql</code><br>如果你系统有安装，那可以选择进行卸载:<br>    <code>rpm -e mysql</code>　　// 普通删除模式<br>    <code>rpm -e --nodeps mysql</code>　　// 强力删除模式，如果使用上面命令删除时，提示有依赖的其它文件，则用该命令可以对其进行强力删除</p>
-<ul>
-<li>下载MySql5.7.22 yum库<br><code>rpm wgethttp://dev.MySQL.com/get/mysql57-community-release-el7-7.noarch.rpm</code></li>
-<li>安装yum包<br><code>yum install mysql57-community-release-el7-7.noarch.rpm</code></li>
-<li>安装myslq服务<br><code>yum install mysql-server</code><br><code>yum install mysql-devel</code></li>
-<li>启动mysql服务<br><code>service mysqld start</code> //启动服务<br><code>service mysqld restart</code> //重启服务<br><code>service mysqld stop</code> //停止服务<br>服务启动好之后,然后登录mysql<br>mysql -uroot -p<br>然后提示输入密码,可是我们并没有设置密码(好像是安装的时候有初始化密码,当时并没在意),这个时候只能密码重置了<h3 id="mysql修改密码"><a href="#mysql修改密码" class="headerlink" title="mysql修改密码"></a>mysql修改密码</h3></li>
-<li>修改mysql的登录文件,<br><code>vi /etc/my.cnf</code><br>然后在my.cnf的最下面添加skip-grant-tables,重启mysql服务,然后直接用mysql命令即可免密码登录<br><code>mysql</code></li>
-<li>然后就是修改密码,登录后执行命令<br><code>use mysql;</code><br><code>update user set password=password(&#39;123456&#39;) where user=&#39;root&#39;;</code>  //修改密码<br><code>flush privileges;</code>  //更新权限<br><code>exit;</code><br>然后在把之前的修改过的my.cnf文件修改回来,即删除skip-grant-tables,在重启即可!</li>
-</ul>
-<h3 id="mysql实现远程连接"><a href="#mysql实现远程连接" class="headerlink" title="mysql实现远程连接"></a>mysql实现远程连接</h3><p>如果是阿里云服务器,,要先开发3306端口<br>登录mysql,然后<br><code>use mysql;</code><br><code>update user set host = &#39;%&#39; where user = &#39;root&#39;;</code><br>然后,在重启mysql服务即可!</p>
-<h3 id="mysql修改编码-解决插入数据库的数据乱码问题"><a href="#mysql修改编码-解决插入数据库的数据乱码问题" class="headerlink" title="mysql修改编码  解决插入数据库的数据乱码问题"></a>mysql修改编码  解决插入数据库的数据乱码问题</h3><p>修改 <code>/etc/mysql/my.cnf</code>  （默认的安装路径）<br>打开my.cnf后，在文件内的[mysqld]下增加如下两行设置:<br><code>character_set_server=utf8</code><br><code>init_connect=&#39;SET NAMES utf8&#39;</code><br>然后重启mysql服务即可<br><code>service mysqld restart</code></p>
-
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 安装mysql<br>       yum install mysql<br>       yum install mysql-server<br>       yum install mysql-devel<br>这个默认安装的是mysql5.5版的,由于5.5的不支持默认当前系统时间,所以开始5.7.22的踩坑之路……..<br>
+        
+          <a class="article-more-a" href="/2018/05/03/Linux下安装5.7.22版MySql/#more">more >></a>
+        
       
 
       
