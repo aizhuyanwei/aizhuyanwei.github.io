@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>那些年我们踩过的坑</title>
+  <title>spring aop 底层实现原理解析 | 那些年我们踩过的坑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="*{ 		margin:0; 		padding:0; 	} 	#textBox{ 		position: absolute; 		left: 0; 		top: 0; 		z-index: -999; 	} 	#bg{ 		background: url(sgws.jpg) -50px;  		width:500px; 		height: 314px; 		text-align:">
-<meta property="og:type" content="website">
-<meta property="og:title" content="那些年我们踩过的坑">
-<meta property="og:url" content="http://yoursite.com/assets/demo/mediator/demo.html">
+  <meta name="description" content="Spring的两大核心之一就是AOP，AOP：面向切面编程。在说原理之前，得先知道一些AOP的专业术语。 AOP的专业术语 连接点（JoinPoint）：增强执行的位置（增加代码的位置），Spring只支持方法； 切点（PointCut）：具体的连接点；一般可能通过一个表达式来描述； 增强（Advice）：也称为消息，指的是增加的额外的代码，Spring中，增强除了包含代码外，还包含位置信息；">
+<meta name="keywords" content="aop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring aop 底层实现原理解析">
+<meta property="og:url" content="http://yoursite.com/2018/05/07/spring-aop-底层实现原理解析/index.html">
 <meta property="og:site_name" content="那些年我们踩过的坑">
-<meta property="og:description" content="*{ 		margin:0; 		padding:0; 	} 	#textBox{ 		position: absolute; 		left: 0; 		top: 0; 		z-index: -999; 	} 	#bg{ 		background: url(sgws.jpg) -50px;  		width:500px; 		height: 314px; 		text-align:">
+<meta property="og:description" content="Spring的两大核心之一就是AOP，AOP：面向切面编程。在说原理之前，得先知道一些AOP的专业术语。 AOP的专业术语 连接点（JoinPoint）：增强执行的位置（增加代码的位置），Spring只支持方法； 切点（PointCut）：具体的连接点；一般可能通过一个表达式来描述； 增强（Advice）：也称为消息，指的是增加的额外的代码，Spring中，增强除了包含代码外，还包含位置信息；">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-02T05:43:32.252Z">
+<meta property="og:image" content="https://img-blog.csdn.net/20170509085422674?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveHV4aWFvcXVuMF8w/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="https://img-blog.csdn.net/20170509091115731?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveHV4aWFvcXVuMF8w/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2018-05-07T08:42:52.733Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="那些年我们踩过的坑">
-<meta name="twitter:description" content="*{ 		margin:0; 		padding:0; 	} 	#textBox{ 		position: absolute; 		left: 0; 		top: 0; 		z-index: -999; 	} 	#bg{ 		background: url(sgws.jpg) -50px;  		width:500px; 		height: 314px; 		text-align:">
+<meta name="twitter:title" content="spring aop 底层实现原理解析">
+<meta name="twitter:description" content="Spring的两大核心之一就是AOP，AOP：面向切面编程。在说原理之前，得先知道一些AOP的专业术语。 AOP的专业术语 连接点（JoinPoint）：增强执行的位置（增加代码的位置），Spring只支持方法； 切点（PointCut）：具体的连接点；一般可能通过一个表达式来描述； 增强（Advice）：也称为消息，指的是增加的额外的代码，Spring中，增强除了包含代码外，还包含位置信息；">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20170509085422674?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveHV4aWFvcXVuMF8w/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
   
     <link rel="alternative" href="/atom.xml" title="那些年我们踩过的坑" type="application/atom+xml">
   
@@ -158,85 +162,74 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-spring-aop-底层实现原理解析" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      spring aop 底层实现原理解析
+    </h1>
+  
+
+        
+        <a href="/2018/05/07/spring-aop-底层实现原理解析/" class="archive-article-date">
+  	<time datetime="2018-05-07T08:41:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-07</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!DOCTYPE HTML>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script type="text/javascript" src="jquery.js"></script>
-<style type="text/css">
-	*{
-		margin:0;
-		padding:0;
-	}
-	#textBox{
-		position: absolute;
-		left: 0;
-		top: 0;
-		z-index: -999;
-	}
-	#bg{
-		background: url(sgws.jpg) -50px;
+        <blockquote>
+<h6 id="Spring的两大核心之一就是AOP，AOP：面向切面编程。在说原理之前，得先知道一些AOP的专业术语。"><a href="#Spring的两大核心之一就是AOP，AOP：面向切面编程。在说原理之前，得先知道一些AOP的专业术语。" class="headerlink" title="Spring的两大核心之一就是AOP，AOP：面向切面编程。在说原理之前，得先知道一些AOP的专业术语。"></a>Spring的两大核心之一就是AOP，AOP：面向切面编程。在说原理之前，得先知道一些AOP的专业术语。</h6></blockquote>
+<h3 id="AOP的专业术语"><a href="#AOP的专业术语" class="headerlink" title="AOP的专业术语"></a>AOP的专业术语</h3><ul>
+<li>连接点（JoinPoint）：增强执行的位置（增加代码的位置），Spring只支持方法；</li>
+<li>切点（PointCut）：具体的连接点；一般可能通过一个表达式来描述；</li>
+<li>增强（Advice）：也称为消息，指的是增加的额外的代码，Spring中，增强除了包含代码外，还包含位置信息；</li>
+<li>Spring中一共有四种增强：<ul>
+<li>MethodBeforeAdvice:前置增强</li>
+<li>MethodInterceptor：环绕增强</li>
+<li>ThrowsAdvice：异常增强</li>
+<li>AfterReturingAdvice：返回值增强</li>
+</ul>
+</li>
+<li>引介（Introduction）：特殊的增强，动态为类增加方法</li>
+<li>织入（Weaving）：将增强加入到目标类的过程，织入分为三种时期<ul>
+<li>编译器:AspectJ</li>
+<li>类加载</li>
+<li>运行期：jdk动态代理（实现接口），CGlib（子类，不能用final）</li>
+</ul>
+</li>
+<li>目标对象（Target）：原始对象</li>
+<li>代理对象（Proxy）：加入了增强的对象，是生成的；</li>
+<li>切面（Aspect）：切点+增强</li>
+</ul>
+<blockquote>
+<h6 id="接下来我要说的就是在运行期间织入的两种实现方式"><a href="#接下来我要说的就是在运行期间织入的两种实现方式" class="headerlink" title="接下来我要说的就是在运行期间织入的两种实现方式"></a>接下来我要说的就是在运行期间织入的两种实现方式</h6></blockquote>
+<p>JDK动态代理（实现接口）</p>
+<h5 id="什么是代理模式呢？"><a href="#什么是代理模式呢？" class="headerlink" title="什么是代理模式呢？"></a>什么是代理模式呢？</h5><p>  代理模式有三个角色，分别是</p>
+<ul>
+<li>抽象角色：接口</li>
+<li>目标角色：实现类</li>
+<li>代理角色：实现接口（InvocationHandler），并引用目标角色<h5 id="代理模式与装饰者模式的区别"><a href="#代理模式与装饰者模式的区别" class="headerlink" title="代理模式与装饰者模式的区别"></a>代理模式与装饰者模式的区别</h5>类图（结构）基本一样，但目的不同，装饰模式的前提是已经所有的类，并进行组装；而<br>使用代理模式时，我们不能直接访问目标角色或没有权限访问时，可以使用代理模式</li>
+</ul>
+<h5 id="代理模式分为两种"><a href="#代理模式分为两种" class="headerlink" title="代理模式分为两种"></a>代理模式分为两种</h5><p>静态代理：需要为每个目标角色，创建一个对应的代理角色；类的数量会急剧膨胀<br>动态代理：自动为每个目标角色生成对应的代理角色</p>
+<p>接下来就是jdk动态代理的代码：<br>实现jdk动态代理的前提是所有的目标类都必须要基于一个统一的接口</p>
+<h6 id="创建统一的接口"><a href="#创建统一的接口" class="headerlink" title="创建统一的接口"></a>创建统一的接口</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package com.dao;  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">/** </span><br><span class="line"> * 为目标类定义统一的接口SleepDao </span><br><span class="line"> * @author XuXQ </span><br><span class="line"> * </span><br><span class="line"> */  </span><br><span class="line">public interface SleepDao &#123;  </span><br><span class="line">&lt;span style=&quot;white-space:pre;&quot;&gt; &lt;/span&gt;  </span><br><span class="line">&lt;span style=&quot;white-space:pre;&quot;&gt; &lt;/span&gt;public void sleep();  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="定义目标对象"><a href="#定义目标对象" class="headerlink" title="定义目标对象"></a>定义目标对象</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package com.daoImpl;  </span><br><span class="line">  </span><br><span class="line">import com.dao.SleepDao;  </span><br><span class="line">  </span><br><span class="line">/** </span><br><span class="line"> * 目标类 </span><br><span class="line"> * @author XuXQ </span><br><span class="line"> * </span><br><span class="line"> */  </span><br><span class="line">public class SleepDaoImpl implements SleepDao &#123;  </span><br><span class="line">  </span><br><span class="line">    @Override  </span><br><span class="line">    public void sleep() &#123;  </span><br><span class="line">        System.out.println(&quot;本大人要睡觉了&quot;);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="创建代理角色"><a href="#创建代理角色" class="headerlink" title="创建代理角色"></a>创建代理角色</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package com.handler;  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">import java.lang.reflect.InvocationHandler;  </span><br><span class="line">import java.lang.reflect.Method;  </span><br><span class="line">/** </span><br><span class="line"> * 创建的类得需要实现InvocationHandler,并重写invoke()方法 </span><br><span class="line"> * InvocationHandler 是代理实例的调用处理程序 实现的接口 </span><br><span class="line"> * 即：MyInvocationHandler 是代理实例的调用处理程序 </span><br><span class="line"> * @author XuXQ </span><br><span class="line"> * </span><br><span class="line"> */  </span><br><span class="line">public class MyInvoctionHandler implements InvocationHandler &#123;  </span><br><span class="line">    Object object=null;//目标对象  </span><br><span class="line">      </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">    public MyInvoctionHandler(Object object) &#123;  </span><br><span class="line">        super();  </span><br><span class="line">        this.object = object;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">    /** </span><br><span class="line">     * proxy=代理对象 </span><br><span class="line">     * method=被调用方法的方法名 </span><br><span class="line">     * args=被调用方法的参数 </span><br><span class="line">     */  </span><br><span class="line">    @Override  </span><br><span class="line">    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;  </span><br><span class="line">        System.out.println(&quot;睡觉前要脱衣服啊&quot;);  </span><br><span class="line">        Object obj=method.invoke(object, args);//obj为目标对象调用方法的返回值  </span><br><span class="line">        System.out.println(&quot;睡着了当然得做个美梦啊&quot;);  </span><br><span class="line">        return obj;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="编写测试用例"><a href="#编写测试用例" class="headerlink" title="编写测试用例"></a>编写测试用例</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">package com.handler;  </span><br><span class="line">[java] view plain copy</span><br><span class="line">import static org.junit.Assert.*;  </span><br><span class="line">  </span><br><span class="line">import java.lang.reflect.Method;  </span><br><span class="line">import java.lang.reflect.Proxy;  </span><br><span class="line">  </span><br><span class="line">import org.junit.After;  </span><br><span class="line">import org.junit.Before;  </span><br><span class="line">import org.junit.Test;  </span><br><span class="line">  </span><br><span class="line">import com.dao.SleepDao;  </span><br><span class="line">import com.daoImpl.SleepDaoImpl;  </span><br><span class="line">  </span><br><span class="line">public class Test1 &#123;  </span><br><span class="line">  </span><br><span class="line">    @Before  </span><br><span class="line">    public void setUp() throws Exception &#123;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    @After  </span><br><span class="line">    public void tearDown() throws Exception &#123;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    @Test  </span><br><span class="line">    public void test() &#123;  </span><br><span class="line">        //目标类必须基于统一的接口  </span><br><span class="line">        SleepDao s=new SleepDaoImpl();  </span><br><span class="line">        ClassLoader classLoader=s.getClass().getClassLoader();  </span><br><span class="line">        MyInvoctionHandler myInvoctionHandler=new MyInvoctionHandler(s);  </span><br><span class="line">          </span><br><span class="line">        //Proxy为InvocationHandler实现类动态创建一个符合某一接口的代理实例    </span><br><span class="line">        SleepDao sd=(SleepDao) Proxy.newProxyInstance(classLoader, s.getClass().getInterfaces(), myInvoctionHandler);  </span><br><span class="line">          </span><br><span class="line">        //相当于调用代理角色的Invoke()  </span><br><span class="line">        sd.sleep();  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdn.net/20170509085422674?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveHV4aWFvcXVuMF8w/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="image"></p>
+<p>由结果可以看到成功的将增强织入到了目标对象中了</p>
+<h6 id="CGlib代理"><a href="#CGlib代理" class="headerlink" title="CGlib代理"></a>CGlib代理</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package com.cglibproxy;  </span><br><span class="line">/** </span><br><span class="line"> * 和JDK动态代理不同，不需要创建统一的接口 </span><br><span class="line"> * @author XuXQ </span><br><span class="line"> * </span><br><span class="line"> */  </span><br><span class="line">public class Base &#123;  </span><br><span class="line">    public void sleep()&#123;  </span><br><span class="line">        System.out.println(&quot;本大少要睡觉啦&quot;);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建cglib的代理对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">package com.cglibproxy;  </span><br><span class="line">  </span><br><span class="line">import java.lang.reflect.Method;  </span><br><span class="line">  </span><br><span class="line">import org.springframework.cglib.proxy.Enhancer;  </span><br><span class="line">import org.springframework.cglib.proxy.MethodInterceptor;  </span><br><span class="line">import org.springframework.cglib.proxy.MethodProxy;  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">//用来生成代理对象  </span><br><span class="line">public class CglibProxy implements MethodInterceptor &#123;  </span><br><span class="line">      </span><br><span class="line">    public Object getProxy(Object object)&#123;  </span><br><span class="line">        Enhancer e=new Enhancer();//创建代理对象类  </span><br><span class="line">        e.setSuperclass(object.getClass());//声明代理对象的父类是谁（是目标对象）  </span><br><span class="line">        e.setCallback(this);//设置回调函数，即调用intercept()  </span><br><span class="line">        return e.create();//返回创建的代理对象  </span><br><span class="line">    &#125;  </span><br><span class="line">    /** </span><br><span class="line">     * proxy=代理对象，也是目标对象的子类 </span><br><span class="line">     * args=方法参数 </span><br><span class="line">     */  </span><br><span class="line">    @Override  </span><br><span class="line">    public Object intercept(Object proxy, Method method, Object[] args, MethodProxy arg3) throws Throwable &#123;  </span><br><span class="line">        System.out.println(&quot;你个大懒猪，竟然睡觉前不脱衣服，嫌弃o&quot;);  </span><br><span class="line">        Object object=arg3.invokeSuper(proxy, args);  </span><br><span class="line">        System.out.println(&quot;起床啦，要不然得迟到了哦&quot;);  </span><br><span class="line">        return null;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="编写测试用例-1"><a href="#编写测试用例-1" class="headerlink" title="编写测试用例"></a>编写测试用例</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package com.cglibproxy;  </span><br><span class="line">  </span><br><span class="line">import static org.junit.Assert.*;  </span><br><span class="line">  </span><br><span class="line">import org.junit.After;  </span><br><span class="line">import org.junit.Before;  </span><br><span class="line">  </span><br><span class="line">public class Test &#123;  </span><br><span class="line">  </span><br><span class="line">    @Before  </span><br><span class="line">    public void setUp() throws Exception &#123;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    @After  </span><br><span class="line">    public void tearDown() throws Exception &#123;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    @org.junit.Test  </span><br><span class="line">    public void test() &#123;  </span><br><span class="line">        CglibProxy proxy=new CglibProxy();  </span><br><span class="line">        Base base=(Base) proxy.getProxy(new Base());  </span><br><span class="line">        base.sleep();  </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="结果："><a href="#结果：" class="headerlink" title="结果："></a>结果：</h6><p><img src="https://img-blog.csdn.net/20170509091115731?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveHV4aWFvcXVuMF8w/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="image"></p>
+<h6 id="由结果同样可以看到成功的将增强织入到了目标对象中了"><a href="#由结果同样可以看到成功的将增强织入到了目标对象中了" class="headerlink" title="由结果同样可以看到成功的将增强织入到了目标对象中了"></a>由结果同样可以看到成功的将增强织入到了目标对象中了</h6><p>总结<br>当然我们以后写代码都是基于Aspect，直接写注解的，当然这并不代表这我们不需要知道AOP<br>底层的实现原理，至于注解用的是哪种实现方式，使用配置来解决的，这里就不详解了。</p>
 
-		width:500px;
-		height: 314px;
-		text-align: center;
-		position: relative;
-		-webkit-animation:roll 3s infinite ease ;
-		   -moz-animation:roll 3s infinite ease ;
-		    -ms-animation:roll 3s infinite ease ;
-		     -o-animation:roll 3s infinite ease ;
-				animation:roll 3s infinite ease ;
-	}
-	#barHome{
-		width: 300px;
-		height: 10px;
-		background: #f00;
-		overflow: hidden;
-		position: absolute;
-		bottom: 45px;
-		left: 50%;
-		margin-left: -150px;
-	}
-	#barGuest{
-		width: 150px;
-		height: 10px;
-		background: #00f;
-	}
-	#results{
-		width: 300px;
-		position: absolute;
-		bottom: 65px;
-		left: 50%;
-		margin-left: -150px;
-		color: #fff;
-	}
-	#results span{
-		margin: 50px;
-	}
-	@-webkit-keyframes roll {0%{background-position: -90px;}50%{background-position: -10px;}100%{background-position: -90px;}}
-	@-moz-keyframes roll {0%{background-position: -90px;}50%{background-position: -10px;}100%{background-position: -90px;}}
-	@-ms-keyframes roll {0%{background-position: -90px;}50%{background-position: -10px;}100%{background-position: -90px;}}
-	@-o-keyframes roll {0%{background-position: -90px;}50%{background-position: -10px;}100%{background-position: -90px;}}
-	@keyframes roll {0%{background-position: -90px;}50%{background-position: -10px;}100%{background-position: -90px;}}
-</style>
-<title>mediator</title>
-</head>
-<body>
-	<div id="bg">
-		<input id="textBox" type="text">
-		<div id="results">请按F键与J键</div>
-		<div id="barHome">
-			<div id="barGuest"></div>
-		</div>
-	</div>
-<script type="text/javascript" src="mediator.js"></script>
-</body>
-</html>
       
 
       
@@ -265,6 +258,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">aop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -315,7 +319,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/assets/demo/mediator/demo.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/05/07/spring-aop-底层实现原理解析/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -327,6 +331,16 @@
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/03/Linux下安装5.7.22版MySql/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux下安装5.7.22版MySql</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -377,7 +391,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
