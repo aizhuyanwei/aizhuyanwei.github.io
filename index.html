@@ -490,6 +490,83 @@
 
 
   
+    <article id="post-关于Java类加载双亲委派机制的思考" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/26/关于Java类加载双亲委派机制的思考/">关于Java类加载双亲委派机制的思考</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/26/关于Java类加载双亲委派机制的思考/" class="archive-article-date">
+  	<time datetime="2018-04-26T07:57:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="预定义类加载器和双亲委派机制"><a href="#预定义类加载器和双亲委派机制" class="headerlink" title="预定义类加载器和双亲委派机制"></a>预定义类加载器和双亲委派机制</h1><ul>
+<li><h3 id="JVM预定义的三种类型类加载器："><a href="#JVM预定义的三种类型类加载器：" class="headerlink" title="JVM预定义的三种类型类加载器："></a>JVM预定义的三种类型类加载器：</h3></li>
+</ul>
+<p><strong>启动（Bootstrap）类加载器</strong>：是用本地代码实现的类装入器，它负责将 &lt;Java_Runtime_Home&gt;/lib下面的类库加载到内存中（比如rt.jar）。由于引导类加载器涉及到虚拟机本地实现细节，开发者无法直接获取到启动类加载器的引用，所以不允许直接通过引用进行操作。</p>
+<p><strong>标准扩展（Extension）类加载器</strong>：是由 Sun 的 ExtClassLoader（sun.misc.Launcher$ExtClassLoader）实现的。它负责将&lt; Java_Runtime_Home &gt;/lib/ext或者由系统变量 java.ext.dir指定位置中的类库加载到内存中。开发者可以直接使用标准扩展类加载器。</p>
+<p><strong>系统（System）类加载器</strong>：是由 Sun 的 AppClassLoader（sun.misc.Launcher$AppClassLoader）实现的。它负责将系统类路径（CLASSPATH）中指定的类库加载到内存中。开发者可以直接使用系统类加载器。<br>除了以上列举的三种类加载器，还有一种比较特殊的类型 — 线程上下文类加载器。<br>
+        
+          <a class="article-more-a" href="/2018/04/26/关于Java类加载双亲委派机制的思考/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm 加载机制 双亲委派</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-带你快速了解Restful" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -689,15 +766,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">aop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">aop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">jvm 加载机制 双亲委派</a>
               </li>
              
               <li class="article-tag-list-item">

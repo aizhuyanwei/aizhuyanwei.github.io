@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Java的四大特性分别是封装，继承，多态与抽象 | 那些年我们踩过的坑</title>
+  <title>关于Java类加载双亲委派机制的思考 | 那些年我们踩过的坑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.封装 封装的概念：把对象的属性和方法结合成一个独立的整体，隐藏实现细节，并提供对外访问的接口。 封装的好处：  隐藏实现细节。 好比你买了台电视机，你只需要怎么使用，并不用了解其实现原理。">
-<meta name="keywords" content="oop,面向对象,封装,继承,多态,抽象">
+  <meta name="description" content="预定义类加载器和双亲委派机制 JVM预定义的三种类型类加载器：  启动（Bootstrap）类加载器：是用本地代码实现的类装入器，它负责将 &amp;lt;Java_Runtime_Home&amp;gt;/lib下面的类库加载到内存中（比如rt.jar）。由于引导类加载器涉及到虚拟机本地实现细节，开发者无法直接获取到启动类加载器的引用，所以不允许直接通过引用进行操作。 标准扩展（Extension）类加载器：是">
+<meta name="keywords" content="jvm 加载机制 双亲委派">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java的四大特性分别是封装，继承，多态与抽象">
-<meta property="og:url" content="http://yoursite.com/2018/05/20/Java的四大特性分别是封装，继承，多态与抽象/index.html">
+<meta property="og:title" content="关于Java类加载双亲委派机制的思考">
+<meta property="og:url" content="http://yoursite.com/2018/04/26/关于Java类加载双亲委派机制的思考/index.html">
 <meta property="og:site_name" content="那些年我们踩过的坑">
-<meta property="og:description" content="1.封装 封装的概念：把对象的属性和方法结合成一个独立的整体，隐藏实现细节，并提供对外访问的接口。 封装的好处：  隐藏实现细节。 好比你买了台电视机，你只需要怎么使用，并不用了解其实现原理。">
+<meta property="og:description" content="预定义类加载器和双亲委派机制 JVM预定义的三种类型类加载器：  启动（Bootstrap）类加载器：是用本地代码实现的类装入器，它负责将 &amp;lt;Java_Runtime_Home&amp;gt;/lib下面的类库加载到内存中（比如rt.jar）。由于引导类加载器涉及到虚拟机本地实现细节，开发者无法直接获取到启动类加载器的引用，所以不允许直接通过引用进行操作。 标准扩展（Extension）类加载器：是">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-02T02:58:27.094Z">
+<meta property="og:updated_time" content="2018-06-26T07:59:57.497Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java的四大特性分别是封装，继承，多态与抽象">
-<meta name="twitter:description" content="1.封装 封装的概念：把对象的属性和方法结合成一个独立的整体，隐藏实现细节，并提供对外访问的接口。 封装的好处：  隐藏实现细节。 好比你买了台电视机，你只需要怎么使用，并不用了解其实现原理。">
+<meta name="twitter:title" content="关于Java类加载双亲委派机制的思考">
+<meta name="twitter:description" content="预定义类加载器和双亲委派机制 JVM预定义的三种类型类加载器：  启动（Bootstrap）类加载器：是用本地代码实现的类装入器，它负责将 &amp;lt;Java_Runtime_Home&amp;gt;/lib下面的类库加载到内存中（比如rt.jar）。由于引导类加载器涉及到虚拟机本地实现细节，开发者无法直接获取到启动类加载器的引用，所以不允许直接通过引用进行操作。 标准扩展（Extension）类加载器：是">
   
     <link rel="alternative" href="/atom.xml" title="那些年我们踩过的坑" type="application/atom+xml">
   
@@ -159,62 +159,51 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Java的四大特性分别是封装，继承，多态与抽象" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-关于Java类加载双亲委派机制的思考" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Java的四大特性分别是封装，继承，多态与抽象
+      关于Java类加载双亲委派机制的思考
     </h1>
   
 
         
-        <a href="/2018/05/20/Java的四大特性分别是封装，继承，多态与抽象/" class="archive-article-date">
-  	<time datetime="2018-05-20T09:24:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-20</time>
+        <a href="/2018/04/26/关于Java类加载双亲委派机制的思考/" class="archive-article-date">
+  	<time datetime="2018-04-26T07:57:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-封装"><a href="#1-封装" class="headerlink" title="1.封装"></a>1.封装</h3><hr>
-<p>封装的概念：把对象的属性和方法结合成一个独立的整体，隐藏实现细节，并提供对外访问的接口。</p>
-<p>封装的好处：</p>
-<ol>
-<li>隐藏实现细节。<blockquote>
-<p>好比你买了台电视机，你只需要怎么使用，并不用了解其实现原理。</p>
-</blockquote>
+        <h1 id="预定义类加载器和双亲委派机制"><a href="#预定义类加载器和双亲委派机制" class="headerlink" title="预定义类加载器和双亲委派机制"></a>预定义类加载器和双亲委派机制</h1><ul>
+<li><h3 id="JVM预定义的三种类型类加载器："><a href="#JVM预定义的三种类型类加载器：" class="headerlink" title="JVM预定义的三种类型类加载器："></a>JVM预定义的三种类型类加载器：</h3></li>
+</ul>
+<p><strong>启动（Bootstrap）类加载器</strong>：是用本地代码实现的类装入器，它负责将 &lt;Java_Runtime_Home&gt;/lib下面的类库加载到内存中（比如rt.jar）。由于引导类加载器涉及到虚拟机本地实现细节，开发者无法直接获取到启动类加载器的引用，所以不允许直接通过引用进行操作。</p>
+<p><strong>标准扩展（Extension）类加载器</strong>：是由 Sun 的 ExtClassLoader（sun.misc.Launcher$ExtClassLoader）实现的。它负责将&lt; Java_Runtime_Home &gt;/lib/ext或者由系统变量 java.ext.dir指定位置中的类库加载到内存中。开发者可以直接使用标准扩展类加载器。</p>
+<p><strong>系统（System）类加载器</strong>：是由 Sun 的 AppClassLoader（sun.misc.Launcher$AppClassLoader）实现的。它负责将系统类路径（CLASSPATH）中指定的类库加载到内存中。开发者可以直接使用系统类加载器。<br>除了以上列举的三种类加载器，还有一种比较特殊的类型 — 线程上下文类加载器。<br><a id="more"></a></p>
+<ul>
+<li><h3 id="双亲委派机制描述"><a href="#双亲委派机制描述" class="headerlink" title="双亲委派机制描述"></a>双亲委派机制描述</h3>某个特定的类加载器在接到加载类的请求时，首先将加载任务委托给父类加载器，依次递归，如果父类加载器可以完成类加载任务，就成功返回；只有父类加载器无法完成此加载任务时，才自己去加载。</li>
+</ul>
+<h3 id="几点思考"><a href="#几点思考" class="headerlink" title="几点思考"></a>几点思考</h3><ul>
+<li><p>Java虚拟机的第一个类加载器是Bootstrap，这个加载器很特殊，它不是Java类，因此它不需要被别人加载，它嵌套在Java虚拟机内核里面，也就是JVM启动的时候Bootstrap就已经启动，它是用C++写的二进制代码（不是字节码），它可以去加载别的类。</p>
+<p>  这也是我们在测试时为什么发现System.class.getClassLoader()结果为null的原因，这并不表示System这个类没有类加载器，而是它的加载器比较特殊，是BootstrapClassLoader，由于它不是Java类，因此获得它的引用肯定返回null。</p>
 </li>
-</ol>
-<a id="more"></a>
-<ol start="2">
-<li>安全性。<blockquote>
-<p>比如你在程序中私有化了age属性，并提供了对外的get和set方法，当外界 使用set方法为属性设值的时候 你可以在set方法里面做个if判断，把值设值在0-80岁，那样他就不能随意赋值了。</p>
-</blockquote>
+<li><p>委托机制具体含义<br>  当Java虚拟机要加载一个类时，到底派出哪个类加载器去加载呢？<br>  首先当前线程的类加载器去加载线程中的第一个类（假设为类A）。</p>
+<p>  注：当前线程的类加载器可以通过Thread类的getContextClassLoader()获得，也可以通过setContextClassLoader()自己设置类加载器。<br>  如果类A中引用了类B，Java虚拟机将使用加载类A的类加载器去加载类B。<br>  还可以直接调用ClassLoader.loadClass()方法来指定某个类加载器去加载某个类。</p>
 </li>
-</ol>
-<p>3.增加代码的复用性。</p>
-<blockquote>
-<p>好比在工具类中封装的各种方法，你可以在任意地方重复调用，而不用再每处都去实现其细节。</p>
-</blockquote>
-<p>4.模块化</p>
-<blockquote>
-<p>封装分为属性封装，方法封装，类封装，插件封装，模块封装，系统封装等等。<br> 有利于程序的协助分工，互不干扰，方便了模块之间的相互组合与分解，也有利于代码的调试和维护。比如人体由各个器官所组成，如果有个器官出现问题，你只要去对这个器官进行医治就行了。</p>
-</blockquote>
-<h3 id="2-继承"><a href="#2-继承" class="headerlink" title="2.继承"></a>2.继承</h3><hr>
-<p>继承的概念：从已知的一个类中派生出新的一个类，叫子类。子类继承了父类所有方法和属性，只不过父类的私有属性和方法，子类是无法直接访问到的。即只是拥有，但是无法使用</p>
-<p>并能根据自己的实际需求扩展出新的行为。</p>
-<h5 id="继承的好处："><a href="#继承的好处：" class="headerlink" title="继承的好处："></a>继承的好处：</h5><p>1.继承是传递的，容易在其基础上构造，建立和扩充出新的类。</p>
-<p>2.简化了人们对事物的认识和描述，能清晰体现相关类之间的层次结构关系。</p>
-<p>3.能减少数据和代码的冗余度。</p>
-<p>4.大大增加了代码的维护性。</p>
-<h3 id="3-多态"><a href="#3-多态" class="headerlink" title="3.多态"></a>3.多态</h3><hr>
-<p>多态的概念：多个不同的对象对同一消息作出响应，同一消息根据不同的对象而采用各种不同的行为方法。</p>
-<p>多态的好处：主要是利于扩展。直接上代码自己来体会。</p>
-<h3 id="4-抽象"><a href="#4-抽象" class="headerlink" title="4.抽象"></a>4.抽象</h3><hr>
-<p>抽象的概念：通过特定的实例抽取出共同的特征以后形成的概念的过程，它强调主要特征和忽略次要特征。</p>
+<li><p>委托机制的意义<br>   — 防止内存中出现多份同样的字节码<br>   比如两个类A和类B都要加载System类：</p>
+<p>  如果不用委托而是自己加载自己的，那么类A就会加载一份System字节码，然后类B又会加载一份System字节码，这样内存中就出现了两份System字节码。<br>  如果使用委托机制，会递归的向父类查找，也就是首选用Bootstrap尝试加载，如果找不到再向下。这里的System就能在Bootstrap中找到然后加载，如果此时类B也要加载System，也从Bootstrap开始，此时Bootstrap发现已经加载过了System那么直接返回内存中的System即可而不需要重新加载，这样内存中就只有一份System的字节码了。</p>
+</li>
+</ul>
+<h3 id="一道面试题"><a href="#一道面试题" class="headerlink" title="一道面试题"></a>一道面试题</h3><ul>
+<li>能不能自己写个类叫java.lang.System？</li>
+</ul>
+<p>答案：<strong>通常不可以</strong>，但可以采取另类方法达到这个需求。<br>解释：为了不让我们写System类，类加载采用委托机制，这样可以保证爸爸们优先，爸爸们能找到的类，儿子就没有机会加载。而System类是Bootstrap加载器加载的，就算自己重写，也总是使用Java系统提供的System，<strong>自己写的System类根本没有机会得到加载</strong>。</p>
+<p>但是，我们可以<strong>自己定义一个类加载器来达到这个目的</strong>，为了避免双亲委托机制，这个类加载器也必须是特殊的。由于系统自带的三个类加载器都加载特定目录下的类，如果我们自己的类加载器放在一个特殊的目录，那么系统的加载器就无法加载，也就是最终还是由我们自己的加载器加载。</p>
 
       
 
@@ -249,27 +238,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">oop</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">面向对象</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">封装</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">继承</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">多态</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">抽象</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">jvm 加载机制 双亲委派</a>
         		</li>
       		
 		</ul>
@@ -325,7 +294,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/05/20/Java的四大特性分别是封装，继承，多态与抽象/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/26/关于Java类加载双亲委派机制的思考/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -339,18 +308,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/05/23/RPC框架几行代码就够了/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/05/03/Linux下安装5.7.22版MySql/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          RPC框架几行代码就够了
+          Linux下安装5.7.22版MySql
         
       </div>
     </a>
   
   
-    <a href="/2018/05/07/spring-aop-底层实现原理解析/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">spring aop 底层实现原理解析</div>
+    <a href="/2018/04/02/带你快速了解Restful/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">带你快速了解Restful</div>
       <i class="icon-circle-right"></i>
     </a>
   
