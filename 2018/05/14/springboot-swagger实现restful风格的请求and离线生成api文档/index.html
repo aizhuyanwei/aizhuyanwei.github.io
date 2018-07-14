@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>那些年我们踩过的坑</title>
+  <title>springboot+swagger实现restful风格的请求and离线生成api文档 | 那些年我们踩过的坑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="h3,h4{ 			text-align: center; 		} 		#main{ 			width: 350px; 			height: 100px; 			border: 1px solid #000; 			margin: 0 auto; 		} 		#main .box{ 			width: 100px; 			height: 100px; 			margin-le">
-<meta property="og:type" content="website">
-<meta property="og:title" content="那些年我们踩过的坑">
-<meta property="og:url" content="http://yoursite.com/assets/demo/hack_demo.html">
+  <meta name="description" content="得益于Spring Boot 与Swagger，我们不但可以极速的搭建REST、RESTful风格的API服务并且还可以生成优美、强大的在线或离线API文档   首先我们可以利用idea快速搭建一个springboot的web项目 然后就是添加swagger2的依赖jar包">
+<meta name="keywords" content="swagger">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springboot+swagger实现restful风格的请求and离线生成api文档">
+<meta property="og:url" content="http://yoursite.com/2018/05/14/springboot-swagger实现restful风格的请求and离线生成api文档/index.html">
 <meta property="og:site_name" content="那些年我们踩过的坑">
-<meta property="og:description" content="h3,h4{ 			text-align: center; 		} 		#main{ 			width: 350px; 			height: 100px; 			border: 1px solid #000; 			margin: 0 auto; 		} 		#main .box{ 			width: 100px; 			height: 100px; 			margin-le">
+<meta property="og:description" content="得益于Spring Boot 与Swagger，我们不但可以极速的搭建REST、RESTful风格的API服务并且还可以生成优美、强大的在线或离线API文档   首先我们可以利用idea快速搭建一个springboot的web项目 然后就是添加swagger2的依赖jar包">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-02T05:43:32.247Z">
+<meta property="og:updated_time" content="2018-07-14T07:43:51.566Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="那些年我们踩过的坑">
-<meta name="twitter:description" content="h3,h4{ 			text-align: center; 		} 		#main{ 			width: 350px; 			height: 100px; 			border: 1px solid #000; 			margin: 0 auto; 		} 		#main .box{ 			width: 100px; 			height: 100px; 			margin-le">
+<meta name="twitter:title" content="springboot+swagger实现restful风格的请求and离线生成api文档">
+<meta name="twitter:description" content="得益于Spring Boot 与Swagger，我们不但可以极速的搭建REST、RESTful风格的API服务并且还可以生成优美、强大的在线或离线API文档   首先我们可以利用idea快速搭建一个springboot的web项目 然后就是添加swagger2的依赖jar包">
   
     <link rel="alternative" href="/atom.xml" title="那些年我们踩过的坑" type="application/atom+xml">
   
@@ -158,58 +159,43 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-springboot-swagger实现restful风格的请求and离线生成api文档" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      springboot+swagger实现restful风格的请求and离线生成api文档
+    </h1>
+  
+
+        
+        <a href="/2018/05/14/springboot-swagger实现restful风格的请求and离线生成api文档/" class="archive-article-date">
+  	<time datetime="2018-05-14T07:41:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-14</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<title></title>
-	<style type="text/css">
-		h3,h4{
-			text-align: center;
-		}
-		#main{
-			width: 350px;
-			height: 100px;
-			border: 1px solid #000;
-			margin: 0 auto;
-		}
-		#main .box{
-			width: 100px;
-			height: 100px;
-			margin-left: 10px;
-			position: relative;
-			float: left;
-			background: #333;
-			color:#ddd;
-		}
-		#main .task1:hover{
-			z-index: 999;
-		}
-		#main .task2:hover{
-			z-index: 999;
-			background: #999;
-		}
-		#main .task3:hover{
-			z-index: 999;
-			background: #333;
-		}
-	</style>
-</head>
-<body>
-	<h3>三个background为#333的box</h3>
-	<h4>- 请在IE6，IE7中触发hover -</h4>
-	<div id="main">
-		<div class="box task1">box1 - 未设置backgorund</div>
-		<div class="box task2">box2 - background: #999</div>
-		<div class="box task3">box3 - background: #333</div>
-	</div>
-</body>
-</html>
+        <blockquote>
+<p>得益于Spring Boot 与Swagger，我们不但可以极速的搭建REST、RESTful风格的API服务并且还可以生成优美、强大的在线或离线API文档</p>
+</blockquote>
+<ul>
+<li>首先我们可以利用idea快速搭建一个springboot的web项目</li>
+<li>然后就是添加swagger2的依赖jar包<a id="more"></a>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.2.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.2.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>然后添加swagger的配置类</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">package com.demo.swagger.swaggerdemo.conf;</span><br><span class="line"></span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import springfox.documentation.builders.ApiInfoBuilder;</span><br><span class="line">import springfox.documentation.builders.PathSelectors;</span><br><span class="line">import springfox.documentation.builders.RequestHandlerSelectors;</span><br><span class="line">import springfox.documentation.service.ApiInfo;</span><br><span class="line">import springfox.documentation.spi.DocumentationType;</span><br><span class="line">import springfox.documentation.spring.web.plugins.Docket;</span><br><span class="line">import springfox.documentation.swagger2.annotations.EnableSwagger2;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * swagger配置类</span><br><span class="line"> *</span><br><span class="line"> * @author: zyw9527</span><br><span class="line"> * @version: v1.0  Created in 2018年07月14日  14:44 by zyw9527</span><br><span class="line"> */</span><br><span class="line">@Configuration</span><br><span class="line">@EnableSwagger2</span><br><span class="line">public class Swagger2Configuration &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public Docket buildDocket() &#123;</span><br><span class="line">        return new Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo(buildApiInf())</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(&quot;com.demo.swagger.swaggerdemo.controller&quot;))//要扫描的API(Controller)基础包</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">    private ApiInfo buildApiInf() &#123;</span><br><span class="line">        return new ApiInfoBuilder()</span><br><span class="line">                .title(&quot;Spring Boot中使用Swagger2 UI构建API文档&quot;)</span><br><span class="line">                .contact(&quot;zyw9527&quot;)</span><br><span class="line">                .version(&quot;1.0&quot;)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后在我们的接口Controller里面加入相对于的注解即可:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">package com.demo.swagger.swaggerdemo.controller;</span><br><span class="line"></span><br><span class="line">import com.demo.swagger.swaggerdemo.model.UserVO;</span><br><span class="line">import io.swagger.annotations.Api;</span><br><span class="line">import io.swagger.annotations.ApiOperation;</span><br><span class="line">import io.swagger.annotations.ApiParam;</span><br><span class="line">import org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 用户Controller</span><br><span class="line"> *</span><br><span class="line"> * @author: zyw9527</span><br><span class="line"> * @version: v1.0  Created in 2018年07月14日  14:47 by zyw9527</span><br><span class="line"> */</span><br><span class="line">@Api(value = &quot;用户&quot;,description = &quot;操作用户信息的接口&quot;)</span><br><span class="line">@RestController</span><br><span class="line">public class UserController &#123;</span><br><span class="line"></span><br><span class="line">        @ApiOperation(&quot;测试添加用户&quot;)</span><br><span class="line">        @RequestMapping(value = &quot;add/&quot;,method = RequestMethod.POST)</span><br><span class="line">        public UserVO add(@ApiParam(&quot;用户名&quot;) @RequestParam String username,</span><br><span class="line">                          @ApiParam(&quot;密码&quot;) @RequestParam String password)&#123;</span><br><span class="line">            System.out.println(username+&quot;:&quot;+password);</span><br><span class="line">            UserVO userVO = new UserVO();</span><br><span class="line">            userVO.setUsername(username);</span><br><span class="line">            userVO.setPassword(password);</span><br><span class="line"></span><br><span class="line">            return  userVO;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    @ApiOperation(&quot;修改用户&quot;)</span><br><span class="line">    @RequestMapping(value = &quot;update/&quot;)</span><br><span class="line">    public UserVO updateUser(@ApiParam(&quot;用户信息的VO JSON格式&quot;) @RequestBody UserVO userVO)&#123;</span><br><span class="line"></span><br><span class="line">        return  userVO;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>借鉴地址:  <a href="https://www.jianshu.com/p/c5cb33ad4305?nomobile=yes" target="_blank" rel="noopener">点击跳转</a></p>
+
       
 
       
@@ -238,6 +224,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">swagger</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -288,7 +285,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/assets/demo/hack_demo.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/05/14/springboot-swagger实现restful风格的请求and离线生成api文档/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -300,6 +297,25 @@
 </article>
 
   
+<nav id="article-nav">
+  
+    <a href="/2018/05/20/Java的四大特性分别是封装，继承，多态与抽象/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java的四大特性分别是封装，继承，多态与抽象
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/07/spring-aop-底层实现原理解析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">spring aop 底层实现原理解析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -350,7 +366,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
